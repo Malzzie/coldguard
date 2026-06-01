@@ -1,10 +1,22 @@
+# Python
 __pycache__/
 *.pyc
+
+# Pytest
+.pytest_cache/
+
+# Environment
 .env
-venv/
 .env.local
 .idea/
 .vscode/
 node_modules/
 dist/
 build/
+
+# Virtual Environment
+venv/
+.venv/
+
+#database
+*.db
