@@ -23,14 +23,54 @@ class InventoryItem(Base):
     __tablename__ = "inventory_items"
 
     id = Column(Integer, primary_key=True, index=True)
+
+    # Product information
     item_name = Column(String, nullable=False)
+    sku = Column(String, unique=True, nullable=False)
     category = Column(String, nullable=False)
+    description = Column(String, nullable=True)
+
+    # Inventory information
     quantity = Column(Integer, nullable=False)
+
+    # Storage information
     storage_zone = Column(String, nullable=False)
+
+    # Temperature requirements
     minimum_temperature = Column(Float, nullable=False)
     maximum_temperature = Column(Float, nullable=False)
+
+    # Product lifecycle
+    expiry_date = Column(DateTime, nullable=True)
+
+    # Audit information
     created_at = Column(DateTime, default=datetime.utcnow)
 
+# Storage location table for warehouse/cold room locations
+class StorageLocation(Base):
+    __tablename__ = "storage_locations"
+
+    id = Column(Integer, primary_key=True, index=True)
+    location_code = Column(String, unique=True, nullable=False)
+    cold_room = Column(String, nullable=False)
+    zone = Column(String, nullable=False)
+    shelf = Column(String, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+# Inventory movement history table
+class InventoryMovement(Base):
+    __tablename__ = "inventory_movements"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    inventory_item_id = Column(Integer, nullable=False)
+
+    movement_type = Column(String, nullable=False)
+    quantity = Column(Integer, nullable=False)
+
+    reference = Column(String, nullable=True)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
 
 # Temperature log table for cold room readings
 class TemperatureLog(Base):

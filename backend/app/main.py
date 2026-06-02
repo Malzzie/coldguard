@@ -11,6 +11,8 @@ from app import models
 from app.routes import inventory
 from app.routes import temperature
 from app.routes import auth
+from app.routes import locations
+from app.routes import movements
 
 # Create database tables automatically
 Base.metadata.create_all(bind=engine)
@@ -26,8 +28,8 @@ app = FastAPI(
 app.include_router(inventory.router)
 app.include_router(temperature.router)
 app.include_router(auth.router)
-
-
+app.include_router(locations.router)
+app.include_router(movements.router)
 # Basic home route to confirm the API is running
 @app.get("/")
 def home():

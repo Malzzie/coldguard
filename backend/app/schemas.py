@@ -1,16 +1,41 @@
 # Pydantic models validate data sent into and returned from the API
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from datetime import datetime
 
 
 # Shared inventory fields
 class InventoryBase(BaseModel):
     item_name: str
+    sku: str
     category: str
+    description: str | None = None
     quantity: int
     storage_zone: str
     minimum_temperature: float
     maximum_temperature: float
+    expiry_date: datetime | None = None
+
+    @field_validator("item_name", "sku", "category", "storage_zone")
+    @classmethod
+    def required_text_fields_must_not_be_empty(cls, value):
+        if not value or not value.strip():
+            raise ValueError("Required text fields cannot be empty")
+        return value
+
+    @field_validator("quantity")
+    @classmethod
+    def quantity_must_not_be_negative(cls, value):
+        if value < 0:
+            raise ValueError("Quantity cannot be negative")
+        return value
+
+    @field_validator("maximum_temperature")
+    @classmethod
+    def maximum_temperature_must_be_greater_than_minimum(cls, value, info):
+        minimum_temperature = info.data.get("minimum_temperature")
+        if minimum_temperature is not None and value <= minimum_temperature:
+            raise ValueError("Maximum temperature must be greater than minimum temperature")
+        return value
 
 
 # Used when creating a new inventory item
@@ -20,6 +45,52 @@ class InventoryCreate(InventoryBase):
 
 # Used when returning inventory data from the database
 class InventoryResponse(InventoryBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+# Used when increasing or decreasing stock quantity
+class StockAdjustment(BaseModel):
+    quantity: int
+
+# Shared inventory movement fields
+class InventoryMovementBase(BaseModel):
+    inventory_item_id: int
+    movement_type: str
+    quantity: int
+    reference: str | None = None
+
+
+# Used when creating a movement record
+class InventoryMovementCreate(InventoryMovementBase):
+    pass
+
+
+# Used when returning movement records
+class InventoryMovementResponse(InventoryMovementBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+# Shared storage location fields
+class StorageLocationBase(BaseModel):
+    location_code: str
+    cold_room: str
+    zone: str
+    shelf: str
+
+
+# Used when creating a new storage location
+class StorageLocationCreate(StorageLocationBase):
+    pass
+
+
+# Used when returning storage location data from the database
+class StorageLocationResponse(StorageLocationBase):
     id: int
     created_at: datetime
 
