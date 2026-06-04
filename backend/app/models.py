@@ -81,3 +81,51 @@ class TemperatureLog(Base):
     temperature = Column(Float, nullable=False)
     status = Column(String, default="normal")
     recorded_at = Column(DateTime, default=datetime.utcnow)
+
+# Temperature threshold table for configurable zone limits
+class TemperatureThreshold(Base):
+    __tablename__ = "temperature_thresholds"
+
+    id = Column(Integer, primary_key=True, index=True)
+    storage_zone = Column(String, unique=True, nullable=False)
+    minimum_temperature = Column(Float, nullable=False)
+    maximum_temperature = Column(Float, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+# Alert table for temperature violations
+class Alert(Base):
+    __tablename__ = "alerts"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    storage_zone = Column(String, nullable=False)
+
+    temperature = Column(Float, nullable=False)
+
+    severity = Column(String, nullable=False)
+
+    status = Column(String, default="OPEN")
+
+    acknowledged_at = Column(DateTime, nullable=True)
+    acknowledged_by = Column(String, nullable=True)
+
+    resolved_at = Column(DateTime, nullable=True)
+    resolution_notes = Column(String, nullable=True)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+# Alert audit table for tracking alert lifecycle events
+class AlertAudit(Base):
+    __tablename__ = "alert_audits"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    alert_id = Column(Integer, nullable=False)
+
+    action = Column(String, nullable=False)
+
+    performed_by = Column(String, nullable=True)
+
+    notes = Column(String, nullable=True)
+
+    created_at = Column(DateTime, default=datetime.utcnow)

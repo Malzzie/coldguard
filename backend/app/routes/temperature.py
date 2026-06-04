@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -16,12 +16,23 @@ def create_temperature_log(
     log: schemas.TemperatureCreate,
     db: Session = Depends(get_db)
 ):
+    # Get threshold for this storage zone
+    threshold = db.query(models.TemperatureThreshold).filter(
+        models.TemperatureThreshold.storage_zone == log.storage_zone
+    ).first()
+
+    if not threshold:
+         raise HTTPException(
+             status_code=404,
+             detail=f"No threshold configured for zone '{log.storage_zone}'"
+    )
+
     status = "normal"
 
-    if log.temperature > 8:
+    if log.temperature > threshold.maximum_temperature:
         status = "high"
 
-    elif log.temperature < -25:
+    elif log.temperature < threshold.minimum_temperature:
         status = "low"
 
     new_log = models.TemperatureLog(
@@ -33,6 +44,29 @@ def create_temperature_log(
     db.add(new_log)
     db.commit()
     db.refresh(new_log)
+
+    # Create alert automatically
+    if status in ["high", "low"]:
+
+        new_alert = models.Alert(
+        storage_zone=log.storage_zone,
+        temperature=log.temperature,
+        severity=status.upper()
+       )
+
+        db.add(new_alert)
+        db.commit()
+        db.refresh(new_alert)
+
+        audit_record = models.AlertAudit(
+          alert_id=new_alert.id,
+          action="ALERT_CREATED",
+          performed_by="System",
+          notes=f"Automatic alert created for {status.upper()} temperature violation."
+       )
+
+        db.add(audit_record)
+        db.commit()
 
     return new_log
 

@@ -118,6 +118,26 @@ class TemperatureResponse(TemperatureBase):
     class Config:
         from_attributes = True
 
+# Shared temperature threshold fields
+class TemperatureThresholdBase(BaseModel):
+    storage_zone: str
+    minimum_temperature: float
+    maximum_temperature: float
+
+
+# Used when creating a new temperature threshold
+class TemperatureThresholdCreate(TemperatureThresholdBase):
+    pass
+
+
+# Used when returning temperature threshold data from the database
+class TemperatureThresholdResponse(TemperatureThresholdBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
 # Used when registering a new user
 class UserCreate(BaseModel):
     full_name: str
@@ -151,3 +171,44 @@ class LoginResponse(BaseModel):
     user_id: int
     email: str
     role: str
+
+# Shared alert fields
+class AlertBase(BaseModel):
+    storage_zone: str
+    temperature: float
+    severity: str
+
+
+# Returned alert data
+class AlertResponse(AlertBase):
+    id: int
+    status: str
+
+    acknowledged_at: datetime | None
+    acknowledged_by: str | None
+
+    resolved_at: datetime | None = None
+    resolution_notes: str | None = None
+
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class AlertAcknowledge(BaseModel):
+    acknowledged_by: str
+
+class AlertResolve(BaseModel):
+    resolution_notes: str
+
+# Returned alert audit data
+class AlertAuditResponse(BaseModel):
+    id: int
+    alert_id: int
+    action: str
+    performed_by: str | None = None
+    notes: str | None = None
+    created_at: datetime
+
+    class Config:
+        from_attributes = True

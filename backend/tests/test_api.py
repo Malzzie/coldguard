@@ -166,3 +166,96 @@ def test_dashboard_summary():
     )
 
     assert response.status_code == 200
+
+# -----------------------------
+# Sprint 5 - Temperature Thresholds
+# -----------------------------
+
+def test_create_temperature_threshold():
+    response = client.post(
+        "/thresholds/",
+        json={
+            "storage_zone": "Test Frozen Zone",
+            "minimum_temperature": -25,
+            "maximum_temperature": -18
+        }
+    )
+
+    assert response.status_code == 200
+    assert response.json()["storage_zone"] == "Test Frozen Zone"
+
+
+# -----------------------------
+# Sprint 5 - Temperature Monitoring
+# -----------------------------
+
+def test_create_temperature_log():
+    response = client.post(
+        "/temperature/",
+        json={
+            "storage_zone": "Test Frozen Zone",
+            "temperature": -20
+        }
+    )
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "normal"
+
+
+def test_temperature_violation_detected():
+    response = client.post(
+        "/temperature/",
+        json={
+            "storage_zone": "Test Frozen Zone",
+            "temperature": -10
+        }
+    )
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "high"
+
+
+# -----------------------------
+# Sprint 5 - Alert Management
+# -----------------------------
+
+def test_alert_generation():
+    response = client.get("/alerts/")
+
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
+
+
+def test_alert_acknowledgement():
+    response = client.put(
+        "/alerts/1/acknowledge",
+        json={
+            "acknowledged_by": "Pytest User"
+        }
+    )
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "ACKNOWLEDGED"
+
+
+def test_alert_resolution():
+    response = client.put(
+        "/alerts/1/resolve",
+        json={
+            "resolution_notes": "Resolved by automated test"
+        }
+    )
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "RESOLVED"
+
+
+# -----------------------------
+# Sprint 5 - Audit Trail
+# -----------------------------
+
+def test_alert_audit_trail():
+    response = client.get("/alerts/1/audit")
+
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
