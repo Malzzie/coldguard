@@ -1,4 +1,29 @@
-# ColdGuard Design and Testing Document
+# Sprint 1 – Requirements Engineering
+
+---
+
+## Project
+
+**ColdGuard Smart Cold Storage Management System**
+
+---
+
+## Sprint Information
+
+| Item | Details |
+|--------|--------|
+| Sprint | Sprint 1 |
+| Sprint Name | Requirements Engineering |
+| Epic | EPIC-01 – Requirements Engineering |
+| User Stories | US-001 – US-010 |
+
+---
+
+# Sprint Goal
+
+Establish the business, user, functional, and non-functional requirements for the ColdGuard Smart Cold Storage Management System and prepare the project for architecture and implementation phases.
+
+---
 
 # 1. Project Overview
 

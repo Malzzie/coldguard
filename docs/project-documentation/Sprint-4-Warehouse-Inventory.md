@@ -1,5 +1,7 @@
 # Sprint 4 – Warehouse & Inventory
 
+---
+
 ## Project
 
 **ColdGuard Smart Cold Storage Management System**
@@ -13,7 +15,7 @@
 | Sprint      | Sprint 4                        |
 | Sprint Name | Warehouse & Inventory           |
 | Epic        | EPIC-13 – Warehouse & Inventory |
-
+| User Stories| US-055 – US-063                 |
 ---
 
 # Sprint Goal

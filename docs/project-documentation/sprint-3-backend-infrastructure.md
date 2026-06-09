@@ -1,12 +1,26 @@
 # Sprint 3 – Backend Infrastructure
 
+---
+
+## Project
+
+**ColdGuard Smart Cold Storage Management System**
+
+---
+
 ## Sprint Information
 
-**Sprint Name:** Sprint 3 – Backend Infrastructure
 
-**Epic:** EPIC-12 Backend Infrastructure
+| Item        | Details                         |
+| ----------- | ------------------------------- |
+| Sprint      | Sprint 3                        |
+| Sprint Name | Backend Infrastructure          |
+| Epic        | EPIC-12 – Backend Infrastructure|
+| User Stories| US-045 – US-054                 |
 
-**Sprint Goal:**
+---
+
+# Sprint Goal
 
 Build the backend foundation for ColdGuard by implementing the API framework, database integration, inventory management services, temperature monitoring services, authentication structure, API documentation, and backend testing.
 
