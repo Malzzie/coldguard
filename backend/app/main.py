@@ -15,6 +15,7 @@ from app.routes import locations
 from app.routes import movements
 from app.routes import thresholds
 from app.routes import alerts
+from app.routes import reports
 
 # Create database tables automatically
 Base.metadata.create_all(bind=engine)
@@ -34,6 +35,7 @@ app.include_router(locations.router)
 app.include_router(movements.router)
 app.include_router(thresholds.router)
 app.include_router(alerts.router)
+app.include_router(reports.router)
 
 # Basic home route to confirm the API is running
 @app.get("/")

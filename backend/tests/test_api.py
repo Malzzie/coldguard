@@ -49,12 +49,12 @@ def test_create_inventory_item():
     response = client.post(
         "/inventory/",
         json={
-            "item_name": "Frozen Chicken",
-            "sku": "TEST-001",
-            "category": "Frozen Meat",
-            "description": "Test product",
+            "item_name": "Frozen Fish",
+            "sku": "TEST-006",
+            "category": "Frozen Seafood",
+            "description": "Sprint 6 test product",
             "quantity": 100,
-            "storage_zone": "Zone A",
+            "storage_zone": "Zone B",
             "minimum_temperature": -18,
             "maximum_temperature": -12,
             "expiry_date": "2026-12-31T00:00:00"
@@ -62,7 +62,7 @@ def test_create_inventory_item():
     )
 
     assert response.status_code == 200
-    assert response.json()["sku"] == "TEST-001"
+    assert response.json()["sku"] == "TEST-006"
 
 
 def test_duplicate_sku_rejected():
@@ -92,16 +92,15 @@ def test_create_storage_location():
     response = client.post(
         "/locations/",
         json={
-            "location_code": "LOC-001",
-            "cold_room": "Freezer A",
-            "zone": "Zone A",
-            "shelf": "Shelf 1"
+            "location_code": "LOC-006",
+            "cold_room": "Freezer B",
+            "zone": "Zone B",
+            "shelf": "Shelf 2"
         }
     )
 
     assert response.status_code == 200
-    assert response.json()["location_code"] == "LOC-001"
-
+    assert response.json()["location_code"] == "LOC-006"
 
 # -----------------------------
 # Sprint 4 - Stock Tracking
@@ -175,14 +174,14 @@ def test_create_temperature_threshold():
     response = client.post(
         "/thresholds/",
         json={
-            "storage_zone": "Test Frozen Zone",
+            "storage_zone": "Sprint 6 Frozen Zone",
             "minimum_temperature": -25,
             "maximum_temperature": -18
         }
     )
 
     assert response.status_code == 200
-    assert response.json()["storage_zone"] == "Test Frozen Zone"
+    assert response.json()["storage_zone"] == "Sprint 6 Frozen Zone"
 
 
 # -----------------------------
@@ -259,3 +258,4 @@ def test_alert_audit_trail():
 
     assert response.status_code == 200
     assert isinstance(response.json(), list)
+
