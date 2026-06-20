@@ -7,6 +7,9 @@ from app.database import engine, Base
 # Import models so SQLAlchemy knows which tables to create
 from app import models
 
+# Import CORS middleware to allow cross-origin requests from the frontend
+from fastapi.middleware.cors import CORSMiddleware
+
 # Import route files
 from app.routes import inventory
 from app.routes import temperature
@@ -25,6 +28,18 @@ app = FastAPI(
     title="ColdGuard Backend API",
     description="Backend infrastructure for the ColdGuard smart cold store warehouse system",
     version="1.0.0"
+)
+
+# Allow the React frontend to communicate with the FastAPI backend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Register API routes
