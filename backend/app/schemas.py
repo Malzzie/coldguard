@@ -212,3 +212,39 @@ class AlertAuditResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+#---------------------------------------
+# AI Risk Advisor Schemas
+#---------------------------------------
+
+from pydantic import BaseModel
+
+
+class AIRiskResponse(BaseModel):
+    """
+    Response model returned by the AI Risk Advisor.
+    """
+
+    risk_level: str
+    summary: str
+    recommendation: str
+    average_temperature: float
+    highest_temperature: float
+    alert_count: int
+
+# --------------------------------------------------
+# Temperature Trend Insight Schemas
+# --------------------------------------------------
+
+class TemperatureTrendResponse(BaseModel):
+    """
+    Response model for temperature trend insights.
+    """
+
+    average_temperature: float
+    lowest_temperature: float
+    highest_temperature: float
+    total_readings: int
+    alert_count: int
+    trend_status: str
+    insight: str

@@ -52,6 +52,13 @@ function Navbar() {
 
           <Link
             className="nav-link"
+            to="/temperature-insights"
+          >
+            Insights
+          </Link>
+
+          <Link
+            className="nav-link"
             to="/alerts"
           >
             Alerts
@@ -66,11 +73,18 @@ function Navbar() {
 
           <Link
             className="nav-link"
+            to="/ai-risk-advisor"
+          >
+            AI Risk Advisor
+          </Link>
+
+          <Link
+            className="nav-link"
             to="/"
             onClick={handleLogout}
-        >
+          >
             Logout
-        </Link>
+          </Link>
 
         </div>
 

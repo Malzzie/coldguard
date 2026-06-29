@@ -8,6 +8,8 @@ import Dashboard from "./pages/Dashboard";
 import Temperature from "./pages/Temperature";
 import Alerts from "./pages/Alerts";
 import Reports from "./pages/Reports";
+import AIRiskAdvisor from "./pages/AIRiskAdvisor";
+import TemperatureInsights from "./pages/TemperatureInsights";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -66,6 +68,28 @@ function App() {
           element={
             <ProtectedRoute>
               <Reports />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* AI Risk Advisor */}
+
+        <Route
+          path="/ai-risk-advisor"
+          element={
+            <ProtectedRoute>
+              <AIRiskAdvisor />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Temperature Insights */}
+
+        <Route
+          path="/temperature-insights"
+          element={
+            <ProtectedRoute>
+              <TemperatureInsights />
             </ProtectedRoute>
           }
         />

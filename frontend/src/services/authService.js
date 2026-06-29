@@ -2,8 +2,7 @@
 // This file contains functions used to communicate
 // with the FastAPI authentication endpoints.
 
-// Base URL for the ColdGuard backend API
-const API_BASE_URL = "http://127.0.0.1:8000";
+import { API_BASE_URL } from "../config";
 
 // Authenticate a user using email and password
 export async function login(email, password) {

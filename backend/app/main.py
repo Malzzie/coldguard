@@ -19,6 +19,7 @@ from app.routes import movements
 from app.routes import thresholds
 from app.routes import alerts
 from app.routes import reports
+from app.routes import ai
 
 # Create database tables automatically
 Base.metadata.create_all(bind=engine)
@@ -33,10 +34,7 @@ app = FastAPI(
 # Allow the React frontend to communicate with the FastAPI backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -51,6 +49,7 @@ app.include_router(movements.router)
 app.include_router(thresholds.router)
 app.include_router(alerts.router)
 app.include_router(reports.router)
+app.include_router(ai.router)
 
 # Basic home route to confirm the API is running
 @app.get("/")

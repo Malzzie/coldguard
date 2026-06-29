@@ -1,8 +1,7 @@
 // Inventory service
 // This file contains functions that communicate with the FastAPI inventory endpoints.
 
-// Base URL for the local FastAPI backend
-const API_BASE_URL = "http://127.0.0.1:8000";
+import { API_BASE_URL } from "../config";
 
 // Get all inventory items from the backend
 export async function getInventoryItems() {
