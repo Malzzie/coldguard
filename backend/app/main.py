@@ -71,7 +71,7 @@ def create_demo_admin_user():
     finally:
         db.close()
     
-    create_demo_admin_user()
+    
 
 # Create demo operational data for deployed capstone demonstration
 def seed_demo_data():
@@ -223,15 +223,23 @@ def seed_demo_data():
 
     finally:
         db.close()
-
-    seed_demo_data()
-    
+  
 # Create the FastAPI app
 app = FastAPI(
     title="ColdGuard Backend API",
     description="Backend infrastructure for the ColdGuard smart cold store warehouse system",
     version="1.0.0"
 )
+
+@app.on_event("startup")
+def startup_event():
+    """
+    Runs automatically whenever the API starts.
+    Ensures the deployed application always contains
+    demo data for the capstone demonstration.
+    """
+    create_demo_admin_user()
+    seed_demo_data()
 
 # Allow the React frontend to communicate with the FastAPI backend
 app.add_middleware(
