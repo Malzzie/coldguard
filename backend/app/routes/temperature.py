@@ -172,3 +172,37 @@ def get_temperature_insights(
         trend_status=trend_status,
         insight=insight
     )
+
+# Delete a temperature log by ID
+@router.delete("/{log_id}")
+def delete_temperature_log(
+    log_id: int,
+    db: Session = Depends(get_db)
+):
+    """
+    Delete a temperature log by ID.
+
+    This supports administrator cleanup of test or duplicate
+    temperature readings during validation.
+    """
+
+    # Find the temperature log by ID
+    temperature_log = db.query(models.TemperatureLog).filter(
+        models.TemperatureLog.id == log_id
+    ).first()
+
+    # Return an error if the record does not exist
+    if not temperature_log:
+        raise HTTPException(
+            status_code=404,
+            detail="Temperature log not found"
+        )
+
+    # Delete the selected temperature log
+    db.delete(temperature_log)
+    db.commit()
+
+    return {
+        "message": "Temperature log deleted successfully",
+        "deleted_log_id": log_id
+    }
