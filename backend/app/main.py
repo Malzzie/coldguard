@@ -30,10 +30,10 @@ Base.metadata.create_all(bind=engine)
 # Create demo admin user for deployed capstone demonstration
 def create_demo_admin_user():
     """
-    Creates a default demo admin user if one does not already exist.
+    Creates or updates the default demo admin user.
 
-    This ensures the deployed application always has a reliable login
-    account, even if the cloud SQLite database is recreated.
+    This ensures the deployed application always has a reliable
+    login account for the capstone demonstration.
     """
 
     from app.database import SessionLocal
@@ -45,7 +45,15 @@ def create_demo_admin_user():
             models.User.email == "admin@coldguard.com"
         ).first()
 
-        if not existing_user:
+        if existing_user:
+            # Reset demo admin details in case the password was changed
+            existing_user.full_name = "ColdGuard Admin"
+            existing_user.role = "admin"
+            existing_user.hashed_password = hash_password("Password123")
+            existing_user.is_active = True
+
+        else:
+            # Create demo admin if it does not exist
             demo_admin = models.User(
                 full_name="ColdGuard Admin",
                 email="admin@coldguard.com",
@@ -55,7 +63,10 @@ def create_demo_admin_user():
             )
 
             db.add(demo_admin)
-            db.commit()
+
+        db.commit()
+
+        print("Demo admin user is ready.")
 
     finally:
         db.close()
