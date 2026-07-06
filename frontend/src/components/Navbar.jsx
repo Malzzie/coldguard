@@ -50,6 +50,12 @@ function Navbar() {
             Temperature
           </Link>
 
+          <Link className="nav-link" 
+                to="/thresholds"
+          >
+            Thresholds
+          </Link>
+
           <Link
             className="nav-link"
             to="/temperature-insights"

@@ -2,6 +2,7 @@
 // Controls navigation between frontend pages.
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
 
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -10,26 +11,18 @@ import Alerts from "./pages/Alerts";
 import Reports from "./pages/Reports";
 import AIRiskAdvisor from "./pages/AIRiskAdvisor";
 import TemperatureInsights from "./pages/TemperatureInsights";
+import Thresholds from "./pages/Thresholds";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-
   return (
-
     <BrowserRouter>
-
       <Routes>
-
-        {/* Authentication */}
-
-        <Route
-          path="/"
-          element={<Login />}
-        />
+        {/* Authentication page */}
+        <Route path="/" element={<Login />} />
 
         {/* Inventory Dashboard */}
-
         <Route
           path="/dashboard"
           element={
@@ -40,7 +33,6 @@ function App() {
         />
 
         {/* Temperature Monitoring */}
-
         <Route
           path="/temperature"
           element={
@@ -51,7 +43,6 @@ function App() {
         />
 
         {/* Alerts Dashboard */}
-
         <Route
           path="/alerts"
           element={
@@ -62,7 +53,6 @@ function App() {
         />
 
         {/* Reports Dashboard */}
-
         <Route
           path="/reports"
           element={
@@ -73,7 +63,6 @@ function App() {
         />
 
         {/* AI Risk Advisor */}
-
         <Route
           path="/ai-risk-advisor"
           element={
@@ -84,7 +73,6 @@ function App() {
         />
 
         {/* Temperature Insights */}
-
         <Route
           path="/temperature-insights"
           element={
@@ -94,10 +82,17 @@ function App() {
           }
         />
 
+        {/* Temperature Thresholds */}
+        <Route
+          path="/thresholds"
+          element={
+            <ProtectedRoute>
+              <Thresholds />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-
     </BrowserRouter>
-
   );
 }
 

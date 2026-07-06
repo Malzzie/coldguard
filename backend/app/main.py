@@ -13,6 +13,9 @@ from fastapi.middleware.cors import CORSMiddleware
 # Import password hashing utility
 from app.security import hash_password
 
+# Import datetime tools for realistic seeded expiry dates
+from datetime import datetime, timedelta
+
 # Import route files
 from app.routes import inventory
 from app.routes import temperature
@@ -26,6 +29,7 @@ from app.routes import ai
 
 # Create database tables automatically
 Base.metadata.create_all(bind=engine)
+
 
 # Create demo admin user for deployed capstone demonstration
 def create_demo_admin_user():
@@ -70,8 +74,7 @@ def create_demo_admin_user():
 
     finally:
         db.close()
-    
-    
+
 
 # Create demo operational data for deployed capstone demonstration
 def seed_demo_data():
@@ -87,7 +90,8 @@ def seed_demo_data():
     db = SessionLocal()
 
     try:
-        # Only seed data if no temperature logs exist
+        # Only seed data if no temperature logs exist.
+        # This prevents duplicate demo records from being created on every restart.
         existing_logs = db.query(models.TemperatureLog).first()
 
         if existing_logs:
@@ -120,7 +124,12 @@ def seed_demo_data():
         db.add_all(thresholds)
         db.commit()
 
-        # Demo inventory items
+        # Current datetime used to create realistic expiry scenarios.
+        today = datetime.utcnow()
+
+        # Demo inventory items.
+        # These include future, expiring-soon, and expired products
+        # so the dashboard lifecycle cards can be demonstrated.
         inventory_items = [
             models.InventoryItem(
                 item_name="Frozen Chicken",
@@ -130,7 +139,8 @@ def seed_demo_data():
                 quantity=120,
                 storage_zone="Frozen Storage",
                 minimum_temperature=-25,
-                maximum_temperature=-18
+                maximum_temperature=-18,
+                expiry_date=today + timedelta(days=90)
             ),
             models.InventoryItem(
                 item_name="Fresh Lettuce",
@@ -140,7 +150,8 @@ def seed_demo_data():
                 quantity=80,
                 storage_zone="Fresh Produce",
                 minimum_temperature=4,
-                maximum_temperature=10
+                maximum_temperature=10,
+                expiry_date=today + timedelta(days=10)
             ),
             models.InventoryItem(
                 item_name="Insulin Packs",
@@ -150,7 +161,8 @@ def seed_demo_data():
                 quantity=40,
                 storage_zone="Pharmaceutical Storage",
                 minimum_temperature=2,
-                maximum_temperature=8
+                maximum_temperature=8,
+                expiry_date=today - timedelta(days=5)
             ),
         ]
 
@@ -223,13 +235,15 @@ def seed_demo_data():
 
     finally:
         db.close()
-  
+
+
 # Create the FastAPI app
 app = FastAPI(
     title="ColdGuard Backend API",
     description="Backend infrastructure for the ColdGuard smart cold store warehouse system",
     version="1.0.0"
 )
+
 
 @app.on_event("startup")
 def startup_event():
@@ -240,6 +254,7 @@ def startup_event():
     """
     create_demo_admin_user()
     seed_demo_data()
+
 
 # Allow the React frontend to communicate with the FastAPI backend
 app.add_middleware(
@@ -260,6 +275,7 @@ app.include_router(thresholds.router)
 app.include_router(alerts.router)
 app.include_router(reports.router)
 app.include_router(ai.router)
+
 
 # Basic home route to confirm the API is running
 @app.get("/")
