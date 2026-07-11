@@ -1,13 +1,14 @@
-// Service file for AI Risk Advisor API calls
+// Service file for ColdGuard Operational Advisor API calls.
+// The backend provides AI-inspired decision support using warehouse data.
 
 import { API_BASE_URL } from "../config";
 
-// Get AI risk recommendation from the backend
+// Get operational advisor recommendation from the backend.
 export async function getAIRiskAdvisor() {
   const response = await fetch(`${API_BASE_URL}/ai/risk-advisor`);
 
   if (!response.ok) {
-    throw new Error("Failed to fetch AI risk advisor data");
+    throw new Error("Failed to fetch Operational Advisor  data");
   }
 
   return response.json();

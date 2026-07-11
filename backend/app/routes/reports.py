@@ -1,3 +1,5 @@
+from datetime import date
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import func
@@ -13,18 +15,11 @@ router = APIRouter(
 
 
 # Inventory summary report
-# Returns total inventory items, total quantity, and inventory details
 @router.get("/inventory")
-def inventory_summary_report(
-    db: Session = Depends(get_db)
-):
-    # Retrieve all inventory items
+def inventory_summary_report(db: Session = Depends(get_db)):
     items = db.query(models.InventoryItem).all()
-
-    # Count total inventory records
     total_items = len(items)
 
-    # Calculate total stock quantity across all inventory items
     total_quantity = db.query(
         func.sum(models.InventoryItem.quantity)
     ).scalar() or 0
@@ -37,16 +32,9 @@ def inventory_summary_report(
 
 
 # Low stock report
-# Returns inventory items below a specified threshold
 @router.get("/low-stock")
-def low_stock_report(
-    threshold: int = 20,
-    db: Session = Depends(get_db)
-):
-    # Find inventory items at or below the threshold
-    low_stock_items = db.query(
-        models.InventoryItem
-    ).filter(
+def low_stock_report(threshold: int = 20, db: Session = Depends(get_db)):
+    low_stock_items = db.query(models.InventoryItem).filter(
         models.InventoryItem.quantity <= threshold
     ).all()
 
@@ -57,41 +45,86 @@ def low_stock_report(
     }
 
 
-# Temperature compliance report
-# Summarizes temperature monitoring compliance statistics
-@router.get("/temperature-compliance")
-def temperature_compliance_report(
+# Expiry management report
+# Identifies expired, urgent, expiring soon, and healthy inventory items
+@router.get("/expiry-management")
+def expiry_management_report(
+    days: int = 30,
     db: Session = Depends(get_db)
 ):
-    # Retrieve all temperature logs
-    logs = db.query(models.TemperatureLog).all()
+    # Retrieve inventory items that have an expiry date
+    items = db.query(models.InventoryItem).filter(
+        models.InventoryItem.expiry_date.isnot(None)
+    ).all()
 
-    # Count total readings
+    today = date.today()
+    expiry_results = []
+
+    expired_count = 0
+    urgent_count = 0
+    expiring_soon_count = 0
+    healthy_count = 0
+
+    for item in items:
+        # Convert datetime/date value into a date object
+        expiry_date = item.expiry_date
+
+        if hasattr(expiry_date, "date"):
+            expiry_date = expiry_date.date()
+
+        days_remaining = (expiry_date - today).days
+
+        # Classify expiry risk
+        if days_remaining < 0:
+            status = "Expired"
+            expired_count += 1
+        elif days_remaining <= 7:
+            status = "Urgent"
+            urgent_count += 1
+        elif days_remaining <= days:
+            status = "Expiring Soon"
+            expiring_soon_count += 1
+        else:
+            status = "Healthy"
+            healthy_count += 1
+
+        expiry_results.append({
+            "id": item.id,
+            "sku": getattr(item, "sku", None),
+            "item_name": item.item_name,
+            "category": item.category,
+            "storage_zone": item.storage_zone,
+            "quantity": item.quantity,
+            "expiry_date": expiry_date.isoformat(),
+            "days_remaining": days_remaining,
+            "status": status
+        })
+
+    return {
+        "days": days,
+        "products_checked": len(items),
+        "expired": expired_count,
+        "urgent": urgent_count,
+        "expiring_soon": expiring_soon_count,
+        "healthy": healthy_count,
+        "inventory": expiry_results
+    }
+
+
+# Temperature compliance report
+@router.get("/temperature-compliance")
+def temperature_compliance_report(db: Session = Depends(get_db)):
+    logs = db.query(models.TemperatureLog).all()
     total_readings = len(logs)
 
-    # Count compliant readings
-    normal_count = len(
-        [log for log in logs if log.status == "normal"]
-    )
+    normal_count = len([log for log in logs if log.status == "normal"])
+    high_count = len([log for log in logs if log.status == "high"])
+    low_count = len([log for log in logs if log.status == "low"])
 
-    # Count high temperature violations
-    high_count = len(
-        [log for log in logs if log.status == "high"]
-    )
-
-    # Count low temperature violations
-    low_count = len(
-        [log for log in logs if log.status == "low"]
-    )
-
-    # Calculate compliance percentage
     compliance_percentage = 0
 
     if total_readings > 0:
-        compliance_percentage = round(
-            (normal_count / total_readings) * 100,
-            2
-        )
+        compliance_percentage = round((normal_count / total_readings) * 100, 2)
 
     return {
         "total_readings": total_readings,
@@ -101,23 +134,21 @@ def temperature_compliance_report(
         "compliance_percentage": compliance_percentage
     }
 
+
 # Inventory movement audit report
-# Summarizes stock movement activity across the warehouse
 @router.get("/movement-audit")
-def movement_audit_report(
-    db: Session = Depends(get_db)
-):
+def movement_audit_report(db: Session = Depends(get_db)):
     movements = db.query(models.InventoryMovement).all()
 
-    stock_in_count = len(
-        [movement for movement in movements
-         if movement.movement_type == "STOCK_IN"]
-    )
+    stock_in_count = len([
+        movement for movement in movements
+        if movement.movement_type == "STOCK_IN"
+    ])
 
-    stock_out_count = len(
-        [movement for movement in movements
-         if movement.movement_type == "STOCK_OUT"]
-    )
+    stock_out_count = len([
+        movement for movement in movements
+        if movement.movement_type == "STOCK_OUT"
+    ])
 
     return {
         "total_movements": len(movements),
@@ -126,28 +157,26 @@ def movement_audit_report(
         "movements": movements
     }
 
+
 # Alert activity report
-# Summarizes alert lifecycle activity across the warehouse
 @router.get("/alert-activity")
-def alert_activity_report(
-    db: Session = Depends(get_db)
-):
+def alert_activity_report(db: Session = Depends(get_db)):
     alerts = db.query(models.Alert).all()
 
-    open_alerts = len(
-        [alert for alert in alerts
-         if alert.status == "OPEN"]
-    )
+    open_alerts = len([
+        alert for alert in alerts
+        if alert.status == "OPEN"
+    ])
 
-    acknowledged_alerts = len(
-        [alert for alert in alerts
-         if alert.status == "ACKNOWLEDGED"]
-    )
+    acknowledged_alerts = len([
+        alert for alert in alerts
+        if alert.status == "ACKNOWLEDGED"
+    ])
 
-    resolved_alerts = len(
-        [alert for alert in alerts
-         if alert.status == "RESOLVED"]
-    )
+    resolved_alerts = len([
+        alert for alert in alerts
+        if alert.status == "RESOLVED"
+    ])
 
     return {
         "total_alerts": len(alerts),
@@ -157,31 +186,17 @@ def alert_activity_report(
         "alerts": alerts
     }
 
+
 # Reporting dashboard
-# Provides a high-level summary of warehouse operations
 @router.get("/dashboard")
-def reporting_dashboard(
-    db: Session = Depends(get_db)
-):
-    total_inventory_items = db.query(
-        models.InventoryItem
-    ).count()
+def reporting_dashboard(db: Session = Depends(get_db)):
+    total_inventory_items = db.query(models.InventoryItem).count()
 
-    total_movements = db.query(
-        models.InventoryMovement
-    ).count()
+    total_movements = db.query(models.InventoryMovement).count()
+    total_temperature_logs = db.query(models.TemperatureLog).count()
+    total_alerts = db.query(models.Alert).count()
 
-    total_temperature_logs = db.query(
-        models.TemperatureLog
-    ).count()
-
-    total_alerts = db.query(
-        models.Alert
-    ).count()
-
-    open_alerts = db.query(
-        models.Alert
-    ).filter(
+    open_alerts = db.query(models.Alert).filter(
         models.Alert.status == "OPEN"
     ).count()
 

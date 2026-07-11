@@ -89,6 +89,31 @@ export async function resolveAlert(
 }
 
 /**
+ * Archive a resolved alert.
+ * This removes the alert from the active dashboard
+ * while preserving its audit history.
+ */
+export async function archiveAlert(alertId) {
+  const response = await fetch(
+    `${API_BASE_URL}/alerts/${alertId}/archive`,
+    {
+      method: "PUT",
+    }
+  );
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    throw new Error(
+      error.detail ||
+      "Failed to archive alert."
+    );
+  }
+
+  return await response.json();
+}
+
+/**
  * Retrieve the audit trail for a
  * specific alert.
  */

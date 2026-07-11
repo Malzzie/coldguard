@@ -1,6 +1,6 @@
 # Sprint 2 – Architecture & Design
 
-## Project
+# Project
 
 **ColdGuard – Smart Cold Storage Warehouse Management System**
 
@@ -12,7 +12,7 @@
 | ----------- | ------------------------------- |
 | Sprint      | Sprint 2                        |
 | Sprint Name | Architecture & Design           |
-| Epic        | EPIC-11 – Backend Infrastructure|
+| Epic        | EPIC-11 – Architecture & Design |
 | User Stories| US-035 – US-044                 |
 ---
 
@@ -28,7 +28,7 @@ The goal of Sprint 2 was to establish the complete technical foundation for Cold
 * Create UML diagrams representing system structure and interactions.
 * Design the database model and entity relationships.
 * Define service interactions using sequence diagrams.
-* Design deployment architecture using Docker, PostgreSQL, Render, and GitHub Actions.
+* Design deployment architecture using SQLite, Render, and GitHub Actions.
 * Define bounded contexts and domains.
 * Document architecture decisions using ADRs.
 * Define API standards and endpoint structure.
@@ -105,7 +105,7 @@ A layered architecture was designed for ColdGuard consisting of the following la
 
 ### Application Layer
 
-* Flask API Layer
+* FastAPI API Layer
 
 ### Domain Services Layer
 
@@ -120,13 +120,13 @@ A layered architecture was designed for ColdGuard consisting of the following la
 
 ### Data Layer
 
-* PostgreSQL Database
+* SQLite Database
 
 ### Infrastructure Layer
 
-* Docker Containers
-* GitHub Actions CI/CD
 * Render Cloud Hosting
+* Vercel Frontend Hosting
+* GitHub Actions CI/CD
 
 This layered architecture separates presentation, business logic, data persistence, and deployment concerns, improving maintainability and scalability.
 
@@ -156,9 +156,9 @@ The component diagram illustrates communication between:
 
 * User Browser
 * Web Frontend
-* Flask Application/API Layer
+* FastAPI Application/API Layer
 * Domain Services
-* PostgreSQL Database
+* SQLite Database
 * Simulated Sensor Feed
 * GitHub Actions CI/CD
 * Render Hosting
@@ -167,7 +167,7 @@ The component diagram illustrates communication between:
 
 The deployment diagram illustrates the deployment architecture and CI/CD process:
 
-Developer Machine → GitHub Repository → GitHub Actions → Render Hosting → PostgreSQL Database
+Developer Machine → GitHub Repository → GitHub Actions → Render Hosting → SQLite Database
 
 Deployment verification includes automated testing and health-check validation.
 
@@ -354,6 +354,10 @@ GET /dispatch/recommendations
 POST /dispatch
 ```
 
+ **Implementation Note**
+
+ The API architecture documented in Sprint 2 represents the initial RESTful service design established during the Architecture & Design phase. Additional endpoints supporting Reports, Threshold Management, Temperature Insights, AI Warehouse Risk Advisor, and other operational features were implemented and refined during subsequent development sprints as the project evolved.
+
 ---
 
 ## Security Architecture
@@ -406,7 +410,10 @@ GitHub Actions
 Automated Testing
         │
         ▼
-Render Deployment
+Render (Backend)
+        │
+        ▼
+Vercel (Frontend)
         │
         ▼
 Health Check Validation
@@ -479,4 +486,4 @@ docs/
 
 ## Sprint 3 – Backend Infrastructure
 
-Sprint 3 focuses on implementing the ColdGuard backend using Flask, PostgreSQL, Docker, JWT authentication, REST API endpoints, database integration, automated testing, and deployment foundations established during Sprint 2.
+Sprint 3 focuses on implementing the ColdGuard backend using FastAPI, SQLite, Render, JWT authentication, REST API endpoints, database integration, automated testing, and deployment foundations established during Sprint 2.

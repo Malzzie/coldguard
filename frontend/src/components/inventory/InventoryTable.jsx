@@ -138,36 +138,41 @@ function InventoryTable({
                       </td>
 
                       <td>
-                        <div className="input-group input-group-sm">
-                          <input
-                            type="number"
-                            min="1"
-                            className="form-control"
-                            placeholder="Qty"
-                            value={stockAdjustments[item.id] || ""}
-                            onChange={(e) =>
-                              handleStockInputChange(item.id, e.target.value)
-                            }
-                          />
+                        <div className="d-flex align-items-center gap-2">
 
-                          <button
-                            className="btn btn-outline-success px-3"
-                            type="button"
-                            onClick={() => handleIncreaseStock(item.id)}
-                            disabled={actionLoading}
-                          >
-                            +
-                          </button>
+                            <input
+                                type="number"
+                                min="1"
+                                className="form-control form-control-sm"
+                                style={{ width: "85px" }}
+                                placeholder="Qty"
+                                value={stockAdjustments[item.id] || ""}
+                                onChange={(e) =>
+                                    handleStockInputChange(item.id, e.target.value)
+                                }
+                            />
 
-                          <button
-                            className="btn btn-outline-warning px-3"
-                            type="button"
-                            onClick={() => handleDecreaseStock(item.id)}
-                            disabled={actionLoading}
-                          >
-                            -
-                          </button>
-                        </div>
+                            <button
+                                className="btn btn-outline-success btn-sm"
+                                style={{ minWidth: "38px" }}
+                                type="button"
+                                onClick={() => handleIncreaseStock(item.id)}
+                                disabled={actionLoading}
+                            >
+                                +
+                            </button>
+
+                            <button
+                                className="btn btn-outline-warning btn-sm"
+                                style={{ minWidth: "38px" }}
+                                type="button"
+                                onClick={() => handleDecreaseStock(item.id)}
+                                disabled={actionLoading}
+                            >
+                                 −
+                            </button>
+
+                            </div>
                       </td>
 
                       <td>

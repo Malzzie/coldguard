@@ -2,13 +2,13 @@
 
 ---
 
-## Project
+# Project
 
 **ColdGuard Smart Cold Storage Management System**
 
 ---
 
-## Sprint Information
+# Sprint Information
 
 | Item | Details |
 |--------|--------|
@@ -25,11 +25,56 @@ Establish the business, user, functional, and non-functional requirements for th
 
 ---
 
+# Sprint Objectives
+
+- Gather and analyse stakeholder requirements for the ColdGuard Smart Cold Storage Management System.
+- Define the project scope, business objectives, and functional requirements.
+- Identify non-functional requirements, constraints, and assumptions.
+- Develop user personas and user journeys.
+- Create the initial product backlog, epics, and user stories.
+- Establish requirements traceability to support future implementation.
+- Produce the Requirements Engineering documentation that will guide the architecture and development phases.
+
+---
+
+# User Stories Completed
+
+The following user stories were completed during Sprint 1 as part of the Requirements Engineering phase.
+
+| Story ID | Description | Status                           |           |
+|----------|-------------|----------------------------------|-----------|
+| US-001   | Define Project Scope                           | Completed |
+| US-002   | Identify Stakeholders                          | Completed |
+| US-003   | Gather Functional Requirements                 | Completed |
+| US-004   | Define Non-Functional Requirements             | Completed |
+| US-005   | Create User Personas                           | Completed |
+| US-006   | Develop User Journeys                          | Completed |
+| US-007   | Produce Product Backlog                        | Completed |
+| US-008   | Define Initial Epics                           | Completed |
+| US-009   | Create Initial User Stories                    | Completed |
+| US-010   | Produce Requirements Engineering Documentation | Completed |
+
+**Note:** Additional user stories (US-011 - US-034) were created during Sprint 1 as part of backlog refinement and release planning. These stories were scheduled for implementation during subsequent development sprints and therefore were not completed during Sprint 1.
+
+---
+
 # 1. Project Overview
 
-ColdGuard is a smart cold storage warehouse management system designed to improve inventory tracking, temperature monitoring, compliance management, and operational visibility for warehouses storing temperature-sensitive goods such as frozen food and pharmaceuticals.
+ColdGuard is an intelligent Smart Cold Storage Management System designed to improve the management, monitoring, and operational efficiency of temperature-controlled warehouse environments. The system provides secure inventory management, real-time temperature monitoring, automated alert management, operational reporting, executive analytics, and AI-assisted warehouse decision support through a modern full-stack web application.
 
-The system aims to reduce spoilage, automate warehouse monitoring, improve FEFO dispatching, and provide operational analytics through a centralized web-based platform.
+Developed using Agile Scrum principles, ColdGuard combines a FastAPI backend, React frontend, SQLite database, JWT-based authentication, and RESTful APIs to deliver a secure, scalable, and user-friendly warehouse management solution. The completed application has been successfully deployed using Render for the backend and Vercel for the frontend, demonstrating a production-ready implementation of the proposed system.
+
+The completed solution demonstrates the successful application of modern software engineering principles, including Agile Scrum, layered architecture, RESTful API development, secure authentication, automated testing, cloud deployment, and AI-assisted operational analytics, resulting in a production-ready intelligent warehouse management system suitable for academic demonstration and future enhancement.
+
+# 1.1 Project References
+
+| Reference | Description                                                                                               |
+|-------------------------------|-------------------------------------------------------------------------------------- |
+| GitHub Repository             | **[GitHub](https://github.com/Malzzie/coldguard)**                                    |
+| Jira Scrum Board              | **[Jira](https://coldguard.atlassian.net/jira/software/projects/CG/boards/2/timeline?atlOrigin=eyJpIjoiMDhiNWIwMTM3Y2NlNDkzMWE5Y2I3YWZlYzQ0NWQzNWMiLCJwIjoiaiJ9)**                                           |
+| Live Frontend                 | **[ColdGuard Web App](https://coldguard.vercel.app/)**                                |
+| Live Backend API              | **[ColdGuard API](https://coldguard-api-5214.onrender.com/)**                         |
+| Swagger/OpenAPI Documentation | **[Interactive API Docs](https://coldguard-api-5214.onrender.com/docs)**              |
 
 # 2. Problem Statement
 
@@ -41,16 +86,22 @@ There is a need for a centralized intelligent warehouse management platform capa
 
 ## 3.1 In Scope
 
+- Secure user authentication
 - Inventory management
 - Product and batch tracking
 - Warehouse zone management
 - Temperature monitoring
-- Alert generation
+- Temperature threshold management
+- Automated alert generation and management
+- Inventory movement auditing
 - FEFO dispatch recommendations
 - Dashboard analytics
-- Reporting
+- Operational reporting
+- AI-assisted warehouse risk assessment
+- Temperature Trend Insights
 - Simulated sensor data
-- CI/CD and deployment
+- RESTful API integration
+- CI/CD and cloud deployment
 
 ## 3.2 Out of Scope
 
@@ -59,6 +110,7 @@ There is a need for a centralized intelligent warehouse management platform capa
 - Supplier ERP integration
 - SMS notification services
 - Native mobile application
+- Machine learning model training using live production datasets
 
 # 4. Stakeholder Analysis
 
@@ -694,6 +746,41 @@ During Sprint 1, the Jira Scrum board was configured to support agile project ma
 
 The Requirements Engineering phase provides a structured foundation for the subsequent Architecture & Design phase, where system models, UML diagrams, database design, deployment architecture, and implementation planning will be developed.
 
+# Deliverables Produced
+
+The following artefacts were produced during Sprint 1:
+
+- Requirements Engineering document
+- Stakeholder Analysis
+- User Personas
+- Product Backlog
+- Epics
+- User Stories
+- User Journeys
+- Functional Requirements
+- Non-Functional Requirements
+- Requirements Traceability Matrix
+- Initial Testing Strategy
+
+# Evidence
+
+Sprint evidence includes:
+
+- Jira Sprint 1 planning and backlog
+- Defined Epics (EPIC-01 to EPIC-10)
+- User Stories (US-001 to US-010)
+- Requirements documentation
+- Traceability Matrix
+- Initial testing strategy
+
 ## Sprint 1 Outcome
 
 Sprint 1 successfully established the business requirements, operational workflows, and engineering expectations for the ColdGuard platform. The project now has a clearly defined backlog, traceable requirements, agile structure, and testing direction that support progression into technical architecture and implementation phases.
+
+---
+
+# Next Sprint
+
+## Sprint 2 – Architecture & Design
+
+Sprint 2 focuses on transforming the approved requirements into a comprehensive software architecture for ColdGuard. This includes developing UML diagrams, domain-driven design artefacts, database design, deployment architecture, API architecture, security architecture, and architecture decision records that will guide the implementation of the system in subsequent sprints.

@@ -19,6 +19,6 @@ It provides the user interface for:
 - Alerts
 - Reports
 - Temperature insights
-- AI Risk Advisor
+- Operational Advisor
 
 For full project documentation, setup instructions, deployment links, and screenshots, see the root `README.md`.

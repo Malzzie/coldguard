@@ -16,7 +16,12 @@ router = APIRouter(
 def get_alerts(
     db: Session = Depends(get_db)
 ):
-    return db.query(models.Alert).all()
+    # Return only active alerts.
+    # Archived alerts remain in the database for audit/history purposes,
+    # but are hidden from the operational Alerts dashboard.
+    return db.query(models.Alert).filter(
+        models.Alert.status != "ARCHIVED"
+    ).all()
 
 @router.put("/{alert_id}/acknowledge",
             response_model=schemas.AlertResponse)
@@ -82,6 +87,48 @@ def resolve_alert(
        action="ALERT_RESOLVED",
        performed_by="Warehouse Manager",
        notes=request.resolution_notes
+    )
+
+    db.add(audit_record)
+
+    db.commit()
+    db.refresh(alert)
+
+    return alert
+
+@router.put("/{alert_id}/archive",
+            response_model=schemas.AlertResponse)
+def archive_alert(
+    alert_id: int,
+    db: Session = Depends(get_db)
+):
+    # Find the alert that should be archived.
+    alert = db.query(models.Alert).filter(
+        models.Alert.id == alert_id
+    ).first()
+
+    if not alert:
+        raise HTTPException(
+            status_code=404,
+            detail="Alert not found"
+        )
+
+    # Only resolved alerts should be archived.
+    if alert.status != "RESOLVED":
+        raise HTTPException(
+            status_code=400,
+            detail="Only resolved alerts can be archived"
+        )
+
+    # Archive the alert instead of permanently deleting it.
+    # This preserves operational history and audit traceability.
+    alert.status = "ARCHIVED"
+
+    audit_record = models.AlertAudit(
+       alert_id=alert.id,
+       action="ALERT_ARCHIVED",
+       performed_by="Warehouse Manager",
+       notes="Resolved alert archived and removed from active dashboard."
     )
 
     db.add(audit_record)

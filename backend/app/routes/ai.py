@@ -1,8 +1,12 @@
 """
-AI Risk Advisor Routes
+ColdGuard Operational Advisor Routes
 
-Provides lightweight AI-based decision support for
-ColdGuard warehouse monitoring.
+Provides AI-inspired decision support for warehouse monitoring
+using operational rules, temperature analytics, and alert intelligence.
+
+The current implementation uses deterministic business logic and is
+designed so that future versions can integrate advanced AI or LLM
+services without changing the surrounding application architecture.
 """
 
 from fastapi import APIRouter, Depends
@@ -15,17 +19,20 @@ import app.models as models
 
 router = APIRouter(
     prefix="/ai",
-    tags=["AI Risk Advisor"]
+    tags=["Operational Advisor "]
 )
 
 
 @router.get("/risk-advisor", response_model=AIRiskResponse)
 def get_risk_advisor(db: Session = Depends(get_db)):
-    """
-    Analyse warehouse temperature logs and open alerts.
 
-    The endpoint returns a simple AI-style risk assessment that
-    supports warehouse decision-making during the capstone demo.
+    """
+    Analyse warehouse temperature logs and active alerts to produce
+    operational decision-support recommendations.
+
+    The endpoint currently uses deterministic business rules based on
+    temperature readings and alert activity. The architecture is designed
+    to support future integration with advanced AI services.
     """
 
     temperature_logs = (

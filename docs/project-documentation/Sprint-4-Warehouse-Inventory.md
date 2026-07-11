@@ -2,13 +2,13 @@
 
 ---
 
-## Project
+# Project
 
 **ColdGuard Smart Cold Storage Management System**
 
 ---
 
-## Sprint Information
+# Sprint Information
 
 | Item        | Details                         |
 | ----------- | ------------------------------- |
@@ -16,6 +16,7 @@
 | Sprint Name | Warehouse & Inventory           |
 | Epic        | EPIC-13 – Warehouse & Inventory |
 | User Stories| US-055 – US-063                 |
+
 ---
 
 # Sprint Goal
@@ -56,7 +57,23 @@ The objectives of Sprint 4 were:
 
 ---
 
-# Features Implemented
+# Deliverables Produced
+
+The following deliverables were completed during Sprint 4:
+
+- Product Management Module
+- Storage Location Management
+- Stock Quantity Tracking
+- Inventory Movement Tracking
+- Inventory Search Functionality
+- Dashboard Summary API
+- Inventory Validation Rules
+- Automated Backend Tests
+- Sprint 4 Documentation
+
+---
+
+# Technical Implementation
 
 ## Product Management
 
@@ -194,9 +211,9 @@ GET /inventory/dashboard/summary
 
 ---
 
-# Database Changes
+## Database Changes
 
-## InventoryItem
+### InventoryItem
 
 Additional fields added:
 
@@ -208,7 +225,7 @@ expiry_date
 
 ---
 
-## StorageLocation
+### StorageLocation
 
 New table created:
 
@@ -225,7 +242,7 @@ created_at
 
 ---
 
-## InventoryMovement
+### InventoryMovement
 
 New table created:
 
@@ -242,11 +259,11 @@ created_at
 
 ---
 
-# Validation Rules
+## Validation Rules
 
 Implemented validation using Pydantic and API checks.
 
-## Product Validation
+### Product Validation
 
 * SKU required
 * Product Name required
@@ -255,12 +272,12 @@ Implemented validation using Pydantic and API checks.
 * Maximum Temperature must exceed Minimum Temperature
 * Duplicate SKU prevented
 
-## Storage Location Validation
+### Storage Location Validation
 
 * Location Code required
 * Duplicate Location Code prevented
 
-## Inventory Movement Validation
+### Inventory Movement Validation
 
 * Quantity must be greater than zero
 * Movement type must be valid
@@ -268,11 +285,11 @@ Implemented validation using Pydantic and API checks.
 
 ---
 
-# Testing
+## Testing
 
 Automated tests were implemented using Pytest.
 
-## Test Coverage
+### Test Coverage
 
 * Health Endpoint
 * Authentication Endpoint
@@ -288,7 +305,7 @@ Automated tests were implemented using Pytest.
 * Inventory Search
 * Dashboard Summary
 
-## Test Results
+### Test Results
 
 ```text
 13 Passed
@@ -297,50 +314,7 @@ Automated tests were implemented using Pytest.
 
 ---
 
-# Jira Evidence
-
-## Sprint
-
-Sprint 4 – Warehouse & Inventory
-
-## Epic
-
-EPIC-13 – Warehouse & Inventory
-
-## Stories Completed
-
-US-055 through US-063
-
-## Workflow
-
-```text
-To Do
-→ In Progress
-→ Done
-```
-
-All Sprint 4 user stories were completed and validated.
-
----
-
-# GitHub Deliverables
-
-Sprint 4 changes include:
-
-```text
-models.py
-schemas.py
-inventory.py
-locations.py
-movements.py
-main.py
-test_api.py
-Sprint4_Warehouse_Inventory.md
-```
-
----
-
-# Traceability Matrix
+## Traceability Matrix
 
 | Sprint 1 Requirement  | Sprint 2 Design     | Sprint 4 Implementation |
 | --------------------- | ------------------- | ----------------------- |
@@ -355,9 +329,9 @@ Sprint4_Warehouse_Inventory.md
 
 ---
 
-# Sprint Retrospective
+## Sprint Retrospective
 
-## What Went Well
+### What Went Well
 
 * Product management successfully implemented
 * Storage location management completed
@@ -365,13 +339,13 @@ Sprint4_Warehouse_Inventory.md
 * Dashboard functionality implemented
 * Automated tests passed successfully
 
-## Challenges
+### Challenges
 
 * Route ordering considerations in FastAPI
 * Database schema evolution without migrations
 * Validation rule refinement
 
-## Improvements for Future Sprints
+### Improvements for Future Sprints
 
 * Introduce Alembic database migrations
 * Add user attribution to inventory movements
@@ -380,8 +354,61 @@ Sprint4_Warehouse_Inventory.md
 
 ---
 
+# Evidence
+
+## Jira Evidence
+
+### Sprint
+
+Sprint 4 – Warehouse & Inventory
+
+### Epic
+
+EPIC-13 – Warehouse & Inventory
+
+### Stories Completed
+
+US-055 through US-063
+
+### Workflow
+
+```text
+To Do
+→ In Progress
+→ Done
+```
+
+All Sprint 4 user stories were completed and validated.
+
+---
+
+## GitHub Deliverables
+
+Sprint 4 implementation committed to the repository includes:
+
+```text
+models.py
+schemas.py
+inventory.py
+locations.py
+movements.py
+main.py
+test_api.py
+Sprint4_Warehouse_Inventory.md
+```
+
+---
+
 # Sprint Outcome
 
 Sprint 4 successfully delivered the warehouse and inventory management capabilities required for the ColdGuard Smart Cold Storage Management System.
 
 All planned user stories were completed, tested, documented, and aligned with the Agile Scrum process and capstone project requirements.
+
+---
+
+# Next Sprint
+
+## Sprint 5 – Monitoring & Alerts
+
+Sprint 5 focuses on extending the ColdGuard backend with temperature monitoring enhancements, automated alert generation, threshold management, compliance monitoring, and notification workflows that build upon the warehouse and inventory capabilities established during Sprint 4.

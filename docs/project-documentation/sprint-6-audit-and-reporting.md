@@ -2,13 +2,13 @@
 
 ---
 
-## Project
+# Project
 
 **ColdGuard Smart Cold Storage Management System**
 
 ---
 
-## Sprint Information
+# Sprint Information
 
 | Item         | Details                     |
 | ------------ | --------------------------- |
@@ -19,13 +19,13 @@
 
 ---
 
-## Sprint Goal
+# Sprint Goal
 
 The objective of Sprint 6 was to implement reporting and audit capabilities for ColdGuard, providing warehouse managers with visibility into inventory, stock movement activity, temperature compliance, alert management, and overall warehouse operations through centralized reporting endpoints.
 
 ---
 
-## Sprint Objectives
+# Sprint Objectives
 
 * Implement inventory summary reporting.
 * Implement low stock reporting.
@@ -38,24 +38,24 @@ The objective of Sprint 6 was to implement reporting and audit capabilities for 
 
 ---
 
-## User Stories Completed
+# User Stories Completed
 
-| Story ID | Description                              |
-| -------- | ---------------------------------------- |
-| US-074   | Generate Inventory Summary Report        |
-| US-075   | Generate Low Stock Report                |
-| US-076   | Generate Temperature Compliance Report   |
-| US-077   | Generate Inventory Movement Audit Report |
-| US-078   | Generate Alert Activity Report           |
-| US-079   | Generate Reporting Dashboard Endpoint    |
-| US-080   | Document Reporting Endpoints             |
-| US-081   | Sprint 6 Testing & Demo Evidence         |
+| Story ID | Description                              | Status      |
+| -------- | ---------------------------------------- | ----------- |
+| US-074   | Generate Inventory Summary Report        |  Completed  |
+| US-075   | Generate Low Stock Report                |  Completed  |
+| US-076   | Generate Temperature Compliance Report   |  Completed  |
+| US-077   | Generate Inventory Movement Audit Report |  Completed  |
+| US-078   | Generate Alert Activity Report           |  Completed  |
+| US-079   | Generate Reporting Dashboard Endpoint    |  Completed  |
+| US-080   | Document Reporting Endpoints             |  Completed  |
+| US-081   | Sprint 6 Testing & Demo Evidence         |  Completed  |
 
 ---
 
-## Deliverables Produced
+# Deliverables Produced
 
-### Reporting Module
+## Reporting Module
 
 Created:
 
@@ -63,7 +63,7 @@ Created:
 app/routes/reports.py
 ```
 
-### Reporting Endpoints
+## Reporting Endpoints
 
 Implemented:
 
@@ -76,7 +76,7 @@ GET /reports/alert-activity
 GET /reports/dashboard
 ```
 
-### Documentation
+## Documentation
 
 * Swagger/OpenAPI reporting documentation.
 * Sprint 6 implementation evidence.
@@ -84,9 +84,9 @@ GET /reports/dashboard
 
 ---
 
-## Technical Sections
+# Technical Implementation
 
-### Inventory Summary Report
+## Inventory Summary Report
 
 Implemented an inventory reporting endpoint that provides warehouse inventory visibility.
 
@@ -104,7 +104,7 @@ GET /reports/inventory
 
 ---
 
-### Low Stock Report
+## Low Stock Report
 
 Implemented low stock reporting to identify inventory requiring replenishment.
 
@@ -128,7 +128,7 @@ GET /reports/low-stock?threshold=200
 
 ---
 
-### Temperature Compliance Report
+## Temperature Compliance Report
 
 Implemented compliance reporting using temperature monitoring data collected during Sprint 5.
 
@@ -148,7 +148,7 @@ GET /reports/temperature-compliance
 
 ---
 
-### Inventory Movement Audit Report
+## Inventory Movement Audit Report
 
 Implemented audit reporting using inventory movement records.
 
@@ -167,7 +167,7 @@ GET /reports/movement-audit
 
 ---
 
-### Alert Activity Report
+## Alert Activity Report
 
 Implemented reporting for alert lifecycle management.
 
@@ -186,7 +186,7 @@ GET /reports/alert-activity
 
 ---
 
-### Reporting Dashboard
+## Reporting Dashboard
 
 Implemented a consolidated reporting dashboard.
 
@@ -377,17 +377,8 @@ All Sprint 1–6 functionality remains operational with no regression defects id
 
 ---
 
-## Next Sprint
+# Next Sprint
 
-### Sprint 7 – Testing, DevOps & Deployment
+## Sprint 7 – Frontend Development & Testing
 
-Planned Objectives:
-
-* Expand automated test coverage.
-* Improve test validation.
-* Configure deployment readiness.
-* Prepare deployment documentation.
-* Validate end-to-end functionality.
-* Improve system stability.
-* Prepare production-ready deliverables.
-* Prepare demonstration environment for final project presentation.
+Sprint 7 focuses on developing the ColdGuard frontend application using React and Bootstrap, integrating the backend APIs developed in previous sprints, implementing user authentication, dashboard interfaces, inventory management pages, reporting views, alerts, and comprehensive frontend testing to deliver a complete end-to-end warehouse management solution.

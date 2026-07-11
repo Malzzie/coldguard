@@ -6,6 +6,7 @@ import {
   getAlerts,
   acknowledgeAlert,
   resolveAlert,
+  archiveAlert,
   getAlertAudit,
 } from "../services/alertService";
 
@@ -134,6 +135,38 @@ function Alerts() {
     }
   };
 
+   // Archive a resolved alert.
+  // Archived alerts are removed from the active dashboard while
+  // preserving operational history and audit traceability.
+  const handleArchiveAlert = async (alertId) => {
+    const confirmArchive = window.confirm(
+      "Archive this resolved alert?\n\nThe alert will be removed from the active dashboard while preserving its audit history."
+    );
+
+    if (!confirmArchive) return;
+
+    try {
+      setActionLoading(true);
+      setError("");
+      setSuccessMessage("");
+
+      await archiveAlert(alertId);
+
+      setSuccessMessage(
+        "Alert archived successfully."
+      );
+
+      await loadAlerts();
+    } catch (err) {
+      setError(
+        err.message ||
+        "Failed to archive alert."
+      );
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
   // Load and display the audit trail for a selected alert.
   const openAuditModal = async (alert) => {
     try {
@@ -212,12 +245,20 @@ function Alerts() {
 
   // Format backend datetime values for display.
   const formatDateTime = (value) => {
-    if (!value) {
-      return "N/A";
-    }
+  if (!value) {
+    return "N/A";
+  }
 
-    return new Date(value).toLocaleString();
-  };
+  return new Date(value).toLocaleString("en-ZA", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+};
+
 
   // Show loading spinner while alerts are loading.
   if (loading) {
@@ -379,6 +420,16 @@ function Alerts() {
                             }
                           >
                             Resolve
+                          </button>
+
+                          <button
+                            className="btn btn-outline-danger btn-sm px-3"
+                            onClick={() => handleArchiveAlert(alert.id)}
+                            disabled={
+                              actionLoading || alert.status !== "RESOLVED"
+                            }
+                          >
+                            Remove
                           </button>
 
                           <button

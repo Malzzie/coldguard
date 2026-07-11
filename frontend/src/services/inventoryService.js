@@ -39,11 +39,15 @@ export async function createInventoryItem(itemData) {
     body: JSON.stringify(itemData),
   });
 
+  // Read the response body once.
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("Failed to create inventory item");
+    // Display the backend error message when available.
+    throw new Error(data.detail || "Failed to create inventory item");
   }
 
-  return await response.json();
+  return data;
 }
 
 // Update an inventory item

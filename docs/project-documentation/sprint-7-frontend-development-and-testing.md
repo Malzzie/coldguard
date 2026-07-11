@@ -1,29 +1,31 @@
 # Sprint 7 – Frontend Development & Testing
 
-## Project
+---
+
+# Project
 
 **ColdGuard Smart Cold Storage Management System**
 
 ---
 
-## Sprint Information
+# Sprint Information
 
-| Item         | Details                        |
-| ------------ | -------------------------------|
-| Sprint       | Sprint 7                       |
-| Sprint Name  | Frontend Development & Testing |
-| Epic         | EPIC-16 – Audit & Reporting    |
-| User Stories | US-082 – US-089                |
+| Item         | Details                                |
+| ------------ | ---------------------------------------|
+| Sprint       | Sprint 7                               |
+| Sprint Name  | Frontend Development & Testing         |
+| Epic         | EPIC-16 – Frontend Development Testing |
+| User Stories | US-082 – US-089                        |
 
 ---
 
-## Sprint Goal
+# Sprint Goal
 
 Develop a complete React-based frontend for ColdGuard, integrate it with the FastAPI backend, implement navigation and authentication features, and validate the application through frontend testing.
 
 ---
 
-## Sprint Objectives
+# Sprint Objectives
 
 * Create the React frontend project structure.
 * Build the ColdGuard login interface.
@@ -35,70 +37,25 @@ Develop a complete React-based frontend for ColdGuard, integrate it with the Fas
 
 ---
 
-## User Stories Completed
+# User Stories Completed
 
-### US-082 – Create Frontend Project Structure
+| Story ID | Description                       | Status      |
+| -------- | --------------------------------- | ----------- |
+| US-082   | Create Frontend Project Structure |  Completed  |
+| US-083   | Build Login Page                  |  Completed  |
+| US-084   | Build Inventory Dashboard         |  Completed  |
+| US-085   | Build Temperature Dashboard       |  Completed  |
+| US-086   | Build Alerts Dashboard            |  Completed  |
+| US-087   | Build Reports Dashboard           |  Completed  |
+| US-088   | Connect Frontend to Backend API   |  Completed  |
+| US-089   | Frontend Testing & Validation     |  Completed  |
 
-* Created React application using Vite.
-* Installed required frontend dependencies.
-* Configured Bootstrap styling.
-* Established frontend folder structure.
-
-### US-083 – Build Login Page
-
-* Created login interface.
-* Connected login form to backend authentication endpoint.
-* Stored JWT token after successful authentication.
-* Added authentication error handling.
-
-### US-084 – Build Inventory Dashboard
-
-* Displayed inventory summary statistics.
-* Displayed inventory records in tabular format.
-* Connected inventory dashboard to backend API.
-
-### US-085 – Build Temperature Dashboard
-
-* Displayed temperature monitoring statistics.
-* Displayed temperature log records.
-* Connected temperature dashboard to backend API.
-
-### US-086 – Build Alerts Dashboard
-
-* Displayed alert statistics.
-* Displayed alert records.
-* Connected alerts dashboard to backend API.
-
-### US-087 – Build Reports Dashboard
-
-* Displayed consolidated reporting information.
-* Displayed inventory, temperature, movement, and alert summaries.
-* Connected reports dashboard to backend API.
-
-### US-088 – Connect Frontend to Backend API
-
-* Configured React Router navigation.
-* Implemented protected routes.
-* Implemented automatic login redirection.
-* Implemented logout functionality.
-* Verified API integration across all dashboards.
-
-### US-089 – Frontend Testing & Validation
-
-* Verified login functionality.
-* Verified dashboard navigation.
-* Verified inventory dashboard.
-* Verified temperature monitoring dashboard.
-* Verified alerts dashboard.
-* Verified reports dashboard.
-* Verified protected route functionality.
-* Verified logout functionality.
 
 ---
 
-## Deliverables Produced
+# Deliverables Produced
 
-### Frontend Components
+## Frontend Components
 
 * Login Page
 * Inventory Dashboard
@@ -108,7 +65,7 @@ Develop a complete React-based frontend for ColdGuard, integrate it with the Fas
 * Navigation Menu
 * Protected Route Component
 
-### Services
+## Services
 
 * Authentication Service
 * Inventory Service
@@ -116,7 +73,7 @@ Develop a complete React-based frontend for ColdGuard, integrate it with the Fas
 * Alerts Service
 * Reports Service
 
-### Integration Features
+## Integration Features
 
 * JWT Authentication
 * Route Protection
@@ -126,9 +83,9 @@ Develop a complete React-based frontend for ColdGuard, integrate it with the Fas
 
 ---
 
-## Technical Sections
+# Technical Implementation
 
-### Frontend Architecture
+## Frontend Architecture
 
 **Framework:** React + Vite
 
@@ -142,7 +99,7 @@ Develop a complete React-based frontend for ColdGuard, integrate it with the Fas
 
 ---
 
-### Security Features
+## Security Features
 
 * JWT token storage using Local Storage.
 * Protected routes prevent unauthorized access.
@@ -151,7 +108,7 @@ Develop a complete React-based frontend for ColdGuard, integrate it with the Fas
 
 ---
 
-### Testing Summary
+## Testing Summary
 
 The following functionality was validated:
 
@@ -165,7 +122,7 @@ The following functionality was validated:
 * Logout Functionality
 * API Connectivity
 
-No critical defects were identified during testing.
+All planned frontend functionality was successfully validated, and no critical defects were identified during testing.
 
 ---
 
@@ -177,26 +134,47 @@ Users can authenticate, navigate between dashboards, access real-time warehouse 
 
 ---
 
-## Evidence
+# Evidence
 
-* Jira Sprint 7 user stories completed.
-* Frontend implementation completed.
-* Backend integration verified.
-* Navigation and route protection verified.
-* Frontend validation testing completed.
-* Git commit history maintained.
-* Sprint documentation completed.
+## Jira Evidence
+
+- Sprint 7 backlog completed.
+- User Stories US-082 to US-089 marked as Done.
+- EPIC-16 – Frontend Development & Testing completed.
+- Sprint successfully closed in Jira.
 
 ---
 
-## Next Sprint
+## GitHub Evidence
 
-### Sprint 8 – Finalization & Presentation
+Sprint 7 implementation committed to the repository includes:
 
-Planned activities:
+- React frontend application
+- Authentication components
+- Dashboard pages
+- API service modules
+- Navigation components
+- Protected routes
+- Sprint 7 documentation
 
-* Deploy ColdGuard Backend.
-* Deploy ColdGuard Frontend.
-* Perform Final System Validation.
-* Complete Final Documentation.
+---
+
+## Frontend Validation Evidence
+
+- Login functionality verified.
+- Dashboard navigation verified.
+- Inventory dashboard verified.
+- Temperature dashboard verified.
+- Alerts dashboard verified.
+- Reports dashboard verified.
+- Protected routes verified.
+- Logout functionality verified.
+
+---
+
+# Next Sprint
+
+## Sprint 8 – Deployment & Finalization
+
+Sprint 8 focuses on deploying the ColdGuard backend and frontend, performing final system validation, implementing remaining production enhancements, completing project documentation, and preparing the application for demonstration and final MSc capstone submission.
 

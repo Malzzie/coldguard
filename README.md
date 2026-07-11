@@ -26,13 +26,14 @@ The project follows an Agile Scrum development methodology, with implementation 
 | 🌐 Frontend | **[ColdGuard Web App](https://coldguard.vercel.app/)** |
 | ⚙️ Backend API | **[ColdGuard API](https://coldguard-api-5214.onrender.com/)** |
 | 📚 Swagger API Documentation | **[Interactive API Docs](https://coldguard-api-5214.onrender.com/docs)** |
-| 📦 Repository | **[GitHub] (https://github.com/Malzzie/coldguard)** |
+| 📦 Repository | **[GitHub](https://github.com/Malzzie/coldguard)** |
 
 ---
 
 ## ✨ Key Features
 
 - ✅ Secure JWT Authentication
+- ✅ Role-Based Access Control (Administrator)
 - ✅ Warehouse Dashboard
 - ✅ Inventory Management
 - ✅ Temperature Monitoring
@@ -120,7 +121,7 @@ ColdGuard/
 ├── backend/
 │   ├── app/
 │   │   ├── routes/
-│   │   │   ├── ai.py                 # AI Risk Advisor endpoints
+│   │   │   ├── ai.py                 # Operational Advisor endpoints
 │   │   │   ├── alerts.py             # Alert management and audit trail
 │   │   │   ├── auth.py               # Authentication routes
 │   │   │   ├── inventory.py          # Inventory CRUD and stock operations
@@ -289,9 +290,9 @@ ColdGuard was developed as a Master's capstone project to demonstrate applied so
 
 The application automatically seeds demo warehouse data on startup. This ensures that assessors can immediately evaluate the system without manually creating inventory, temperature readings, thresholds, or alerts.
 
-## AI Risk Advisor
+## Operational Advisor
 
-The AI Risk Advisor uses rule-based decision support logic to analyse temperature readings and open alerts. It is designed to demonstrate how operational warehouse data can be converted into management recommendations.
+The Operational Advisor uses rule-based decision support logic to analyse temperature readings and open alerts. It is designed to demonstrate how operational warehouse data can be converted into management recommendations.
 
 ## Admin-Controlled Users
 
@@ -355,7 +356,7 @@ The project also draws upon established software engineering practices, includin
 | Alert Management | ✅ Complete |
 | Reporting | ✅ Complete |
 | Temperature Trend Insights | ✅ Complete |
-| AI Risk Advisor | ✅ Complete |
+| Operational Advisor | ✅ Complete |
 | Frontend | ✅ Complete |
 | Backend API | ✅ Complete |
 | Deployment | ✅ Complete |
@@ -378,6 +379,21 @@ Key achievements include:
 - Deployment using Render and Vercel
 - End-to-end testing using Pytest
 - Agile Scrum project management using Jira
+
+---
+
+## Future Enhancements
+
+Potential future enhancements include:
+
+- Machine Learning-based anomaly detection
+- Predictive inventory forecasting
+- Barcode and QR code integration
+- Multi-warehouse support
+- Real-time IoT sensor integration
+- External AI/LLM integration for conversational operational assistance
+
+These enhancements were identified during the final review phase but fall outside the scope of the current capstone implementation.
 
 ---
 

@@ -2,20 +2,20 @@
 
 ---
 
-## Project
+# Project
 
 **ColdGuard Smart Cold Storage Management System**
 
 ---
 
-## Sprint Information
+# Sprint Information
 
 | Item        | Details                         |
 | ----------- | ------------------------------- |
 | Sprint      | Sprint 5                        |
 | Sprint Name | Monitoring & Alerts             |
 | Epic        | EPIC-14 – Monitoring & Alerts   |
-| User Stories| US-063 – US-073                 |
+| User Stories| US-064 – US-073                 |
 
 ---
 
@@ -37,7 +37,7 @@ The sprint extends the inventory and warehouse functionality implemented in Spri
 
 ---
 
-# Sprint Backlog
+# User Stories Completed
 
 | Story ID | User Story                       | Status    |
 | -------- | -------------------------------- | --------- |
@@ -54,9 +54,27 @@ The sprint extends the inventory and warehouse functionality implemented in Spri
 
 ---
 
-# Functional Requirements Delivered
+# Deliverables Produced
 
-## FR-015 Temperature Recording
+The following deliverables were completed during Sprint 5:
+
+- Temperature Monitoring Module
+- Temperature Threshold Management
+- Alert Management
+- Alert Audit Trail
+- Monitoring Workflow
+- Threshold Evaluation Logic
+- Swagger API Validation
+- Automated Pytest Suite
+- Sprint 5 Documentation
+
+---
+
+# Technical Implementation
+
+## Functional Requirements Delivered
+
+### FR-015 Temperature Recording
 
 ColdGuard can record temperature readings for storage zones.
 
@@ -71,7 +89,7 @@ Status: Complete
 
 ---
 
-## FR-016 Historical Temperature Logs
+### FR-016 Historical Temperature Logs
 
 ColdGuard stores and retrieves historical temperature readings.
 
@@ -85,7 +103,7 @@ Status: Complete
 
 ---
 
-## FR-017 Threshold Violation Detection
+### FR-017 Threshold Violation Detection
 
 ColdGuard evaluates readings against configured thresholds.
 
@@ -101,7 +119,7 @@ Status: Complete
 
 ---
 
-## FR-018 Sensor Data Simulation
+### FR-018 Sensor Data Simulation
 
 Temperature readings can be manually submitted to simulate sensor activity.
 
@@ -115,7 +133,7 @@ Status: Complete
 
 ---
 
-## FR-019 Automatic Alert Generation
+### FR-019 Automatic Alert Generation
 
 ColdGuard automatically creates alerts whenever a threshold violation occurs.
 
@@ -130,7 +148,7 @@ Status: Complete
 
 ---
 
-## FR-020 Alert Acknowledgement
+### FR-020 Alert Acknowledgement
 
 Users can acknowledge alerts to indicate that incidents are under investigation.
 
@@ -145,7 +163,7 @@ Status: Complete
 
 ---
 
-## FR-021 Incident Resolution
+### FR-021 Incident Resolution
 
 Users can formally resolve alerts.
 
@@ -160,7 +178,7 @@ Status: Complete
 
 ---
 
-## FR-022 Alert Audit Trail
+### FR-022 Alert Audit Trail
 
 ColdGuard maintains a complete history of alert lifecycle events.
 
@@ -327,122 +345,6 @@ Returns historical temperature readings stored in the system.
 
 ---
 
-# Temperature Threshold Management
-
-## Create Temperature Threshold
-
-**Endpoint**
-
-```http
-POST /thresholds/
-```
-
-Purpose:
-
-Creates a temperature threshold configuration for a storage zone.
-
-Example Request:
-
-```json
-{
-  "storage_zone": "Frozen",
-  "minimum_temperature": -25,
-  "maximum_temperature": -18
-}
-```
-
----
-
-## Retrieve Thresholds
-
-**Endpoint**
-
-```http
-GET /thresholds/
-```
-
-Purpose:
-
-Returns all configured temperature thresholds.
-
----
-
-# Alert Management
-
-## Retrieve Alerts
-
-**Endpoint**
-
-```http
-GET /alerts/
-```
-
-Purpose:
-
-Returns all generated alerts.
-
----
-
-## Acknowledge Alert
-
-**Endpoint**
-
-```http
-PUT /alerts/{id}/acknowledge
-```
-
-Purpose:
-
-Changes an alert status from OPEN to ACKNOWLEDGED.
-
-Example Request:
-
-```json
-{
-  "acknowledged_by": "Warehouse Manager"
-}
-```
-
----
-
-## Resolve Alert
-
-**Endpoint**
-
-```http
-PUT /alerts/{id}/resolve
-```
-
-Purpose:
-
-Changes an alert status from ACKNOWLEDGED to RESOLVED.
-
-Example Request:
-
-```json
-{
-  "resolution_notes": "Temperature returned to normal operating range."
-}
-```
-
----
-
-# Audit Trail
-
-## Retrieve Alert Audit History
-
-**Endpoint**
-
-```http
-GET /alerts/{id}/audit
-```
-
-Purpose:
-
-Returns all audit events associated with an alert.
-
----
-
 # Monitoring Workflow
 
 The monitoring workflow implemented during Sprint 5 is shown below.
@@ -480,6 +382,46 @@ Status = RESOLVED
         ↓
 Audit Trail Updated
 ```
+
+---
+
+# Temperature Threshold Management
+
+## Create Temperature Threshold
+
+**Endpoint**
+
+```http
+POST /thresholds/
+```
+
+Purpose:
+
+Creates a temperature threshold configuration for a storage zone.
+
+Example Request:
+
+```json
+{
+  "storage_zone": "Frozen",
+  "minimum_temperature": -25,
+  "maximum_temperature": -18
+}
+```
+
+---
+
+## Retrieve Thresholds
+
+**Endpoint**
+
+```http
+GET /thresholds/
+```
+
+Purpose:
+
+Returns all configured temperature thresholds.
 
 ---
 
@@ -545,6 +487,66 @@ LOW
 
 ---
 
+# Alert Management
+
+## Retrieve Alerts
+
+**Endpoint**
+
+```http
+GET /alerts/
+```
+
+Purpose:
+
+Returns all generated alerts.
+
+---
+
+## Acknowledge Alert
+
+**Endpoint**
+
+```http
+PUT /alerts/{id}/acknowledge
+```
+
+Purpose:
+
+Changes an alert status from OPEN to ACKNOWLEDGED.
+
+Example Request:
+
+```json
+{
+  "acknowledged_by": "Warehouse Manager"
+}
+```
+
+---
+
+## Resolve Alert
+
+**Endpoint**
+
+```http
+PUT /alerts/{id}/resolve
+```
+
+Purpose:
+
+Changes an alert status from ACKNOWLEDGED to RESOLVED.
+
+Example Request:
+
+```json
+{
+  "resolution_notes": "Temperature returned to normal operating range."
+}
+```
+
+---
+
 # Alert Lifecycle
 
 The following lifecycle was implemented.
@@ -561,6 +563,22 @@ Each transition is permanently recorded within the audit trail.
 
 ---
 
+# Audit Trail
+
+## Retrieve Alert Audit History
+
+**Endpoint**
+
+```http
+GET /alerts/{id}/audit
+```
+
+Purpose:
+
+Returns all audit events associated with an alert.
+
+---
+
 # Audit Trail Events
 
 The following audit events are automatically generated.
@@ -573,11 +591,13 @@ The following audit events are automatically generated.
 
 ---
 
-# Swagger Testing Evidence
+# Evidence
+
+## Swagger Testing Evidence
 
 The following tests were executed successfully using Swagger UI.
 
-## Temperature Threshold Testing
+### Temperature Threshold Testing
 
 Verified:
 
@@ -590,7 +610,7 @@ PASS
 
 ---
 
-## Temperature Monitoring Testing
+### Temperature Monitoring Testing
 
 Verified:
 
@@ -604,7 +624,7 @@ PASS
 
 ---
 
-## Alert Generation Testing
+### Alert Generation Testing
 
 Verified:
 
@@ -618,7 +638,7 @@ PASS
 
 ---
 
-## Alert Acknowledgement Testing
+### Alert Acknowledgement Testing
 
 Verified:
 
@@ -632,7 +652,7 @@ PASS
 
 ---
 
-## Alert Resolution Testing
+### Alert Resolution Testing
 
 Verified:
 
@@ -661,7 +681,7 @@ PASS
 
 ---
 
-# Automated Testing
+## Automated Testing
 
 Sprint 5 functionality was incorporated into the project test suite.
 
@@ -679,7 +699,7 @@ test_alert_audit_trail
 
 ---
 
-# Pytest Results
+## Pytest Results
 
 Automated testing completed successfully.
 
@@ -695,7 +715,7 @@ PASS
 
 ---
 
-# Definition of Done
+## Definition of Done
 
 Sprint 5 was considered complete when:
 
@@ -720,9 +740,9 @@ COMPLETE
 
 ---
 
-# Sprint Retrospective
+## Sprint Retrospective
 
-## What Went Well
+### What Went Well
 
 * Existing monitoring components were successfully extended.
 * Threshold management improved flexibility.
@@ -733,7 +753,7 @@ COMPLETE
 
 ---
 
-## Challenges Encountered
+### Challenges Encountered
 
 * SQLite schema updates required occasional database recreation during development.
 * Existing functionality from previous sprints required careful alignment.
@@ -741,7 +761,7 @@ COMPLETE
 
 ---
 
-## Improvements For Future Sprints
+### Improvements For Future Sprints
 
 Future enhancements may include:
 
@@ -756,7 +776,7 @@ Future enhancements may include:
 
 ---
 
-# Sprint 5 Summary
+# Sprint Outcome
 
 Sprint 5 successfully delivered the Monitoring and Alerts subsystem for ColdGuard.
 
@@ -774,4 +794,12 @@ The system can now:
 All Sprint 5 user stories were completed successfully.
 
 The sprint achieved its objectives and provides a solid foundation for future reporting, analytics, and dashboard functionality in subsequent sprints.
+
+---
+
+# Next Sprint
+
+## Sprint 6 – Audit & Reporting
+
+Sprint 6 focuses on expanding ColdGuard with comprehensive reporting, audit capabilities, compliance reporting, operational insights, and historical analysis features that build upon the monitoring and alerting functionality implemented during Sprint 5.
 

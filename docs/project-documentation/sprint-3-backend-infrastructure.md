@@ -2,13 +2,13 @@
 
 ---
 
-## Project
+# Project
 
 **ColdGuard Smart Cold Storage Management System**
 
 ---
 
-## Sprint Information
+# Sprint Information
 
 
 | Item        | Details                         |
@@ -36,22 +36,24 @@ The backend was implemented using FastAPI and SQLAlchemy with SQLite used as the
 
 # User Stories Completed
 
-| ID     | User Story                                      | Status |
-| ------ | ----------------------------------------------- | ------ |
-| US-045 | Set up backend API framework                    | Done   |
-| US-046 | Configure database connection layer             | Done   |
-| US-047 | Create backend database models                  | Done   |
-| US-048 | Build inventory API endpoints                   | Done   |
-| US-049 | Create temperature monitoring data model        | Done   |
-| US-050 | Build temperature monitoring API endpoints      | Done   |
-| US-051 | Add basic user authentication structure         | Done   |
-| US-052 | Enable API documentation using Swagger          | Done   |
-| US-053 | Add backend API tests                           | Done   |
-| US-054 | Prepare Sprint 3 backend demonstration evidence | Done   |
+| ID     | User Story                                      | Status    |
+| ------ | ----------------------------------------------- | ----------|
+| US-045 | Set up backend API framework                    | Completed |
+| US-046 | Configure database connection layer             | Completed |
+| US-047 | Create backend database models                  | Completed |
+| US-048 | Build inventory API endpoints                   | Completed |
+| US-049 | Create temperature monitoring data model        | Completed |
+| US-050 | Build temperature monitoring API endpoints      | Completed |
+| US-051 | Add basic user authentication structure         | Completed |
+| US-052 | Enable API documentation using Swagger          | Completed |
+| US-053 | Add backend API tests                           | Completed |
+| US-054 | Prepare Sprint 3 backend demonstration evidence | Completed |
 
 ---
 
-# Backend Architecture Implemented
+# Technical Implementation
+
+## Backend Architecture Implemented
 
 The backend architecture was structured as follows:
 
@@ -152,6 +154,12 @@ Features implemented:
 
 ---
 
+### Implementation Note
+
+The endpoints documented above represent the initial inventory management API implemented during Sprint 3. Additional update, delete, stock adjustment, and inventory management endpoints were introduced during subsequent development sprints as ColdGuard functionality expanded.
+
+---
+
 # Temperature Monitoring API
 
 Temperature monitoring functionality was implemented to support cold-storage management.
@@ -172,6 +180,12 @@ Temperature classifications:
 | Above 8°C             | High   |
 
 This allows ColdGuard to identify abnormal storage conditions.
+
+---
+
+### Implementation Note
+
+The temperature monitoring endpoints established the initial backend monitoring capability. Additional threshold management, reporting, alert handling, and analytics functionality were implemented during later development sprints.
 
 ---
 
@@ -258,7 +272,7 @@ All issues were resolved through debugging and iterative testing.
 
 ---
 
-# Sprint Deliverables
+# Deliverables Produced
 
 The following deliverables were completed:
 
@@ -287,4 +301,37 @@ The system now supports:
 * API documentation
 * Automated testing
 
-These backend services provide the foundation required for Sprint 4, where frontend user interfaces will be developed and integrated with the backend APIs.
+These backend services provide the foundation required for Sprint 4, where warehouse inventory management capabilities will be expanded through additional business 
+logic, inventory workflows, stock movement functionality, and warehouse operations.
+
+---
+
+# Evidence
+
+## Jira Evidence
+
+- Sprint 3 backlog completed.
+- User Stories US-045 to US-054 marked as Done.
+- EPIC-12 – Backend Infrastructure completed.
+- Sprint 3 successfully closed in Jira.
+
+## GitHub Evidence
+
+Backend implementation committed to the repository, including:
+
+- FastAPI application structure
+- SQLAlchemy database configuration
+- Authentication module
+- Inventory API
+- Temperature Monitoring API
+- Swagger documentation
+- Automated backend tests
+- Sprint 3 documentation
+
+---
+
+# Next Sprint
+
+## Sprint 4 – Warehouse & Inventory
+
+Sprint 4 focuses on expanding the backend by implementing warehouse inventory management features, including product management, stock movements, inventory updates, warehouse locations, and supporting business logic that builds upon the backend infrastructure established during Sprint 3.

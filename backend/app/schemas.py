@@ -214,7 +214,7 @@ class AlertAuditResponse(BaseModel):
         from_attributes = True
 
 #---------------------------------------
-# AI Risk Advisor Schemas
+# Operational Advisor Schemas
 #---------------------------------------
 
 from pydantic import BaseModel
@@ -222,7 +222,7 @@ from pydantic import BaseModel
 
 class AIRiskResponse(BaseModel):
     """
-    Response model returned by the AI Risk Advisor.
+    Response model returned by the Operational Advisor .
     """
 
     risk_level: str

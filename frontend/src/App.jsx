@@ -62,7 +62,7 @@ function App() {
           }
         />
 
-        {/* AI Risk Advisor */}
+        {/* Operational Advisor  */}
         <Route
           path="/ai-risk-advisor"
           element={

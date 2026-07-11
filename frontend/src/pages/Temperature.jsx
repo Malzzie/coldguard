@@ -173,13 +173,20 @@ function Temperature() {
     return "badge bg-success px-3 py-2";
   };
 
-  // Format recorded timestamp for display in the logs table.
+    // Format recorded timestamps consistently using South African conventions.
   const formatRecordedAt = (recordedAt) => {
     if (!recordedAt) {
       return "N/A";
     }
 
-    return new Date(recordedAt).toLocaleString();
+    return new Date(recordedAt).toLocaleString("en-ZA", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
   };
 
   // Show loading spinner while data is loading.
@@ -324,7 +331,7 @@ function Temperature() {
                       <td>{log.temperature}°C</td>
                       <td>
                         <span className={getStatusBadgeClass(log.status)}>
-                          {log.status}
+                          {log.status.charAt(0).toUpperCase() + log.status.slice(1)}
                         </span>
                       </td>
                       <td>{formatRecordedAt(log.recorded_at)}</td>

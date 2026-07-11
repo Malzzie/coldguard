@@ -10,6 +10,6 @@ The backend provides REST API endpoints for:
 - Threshold management
 - Alert management
 - Reporting
-- AI Risk Advisor
+- Operational Advisor
 
 For full project documentation, setup instructions, deployment links, and screenshots, see the root `README.md`.

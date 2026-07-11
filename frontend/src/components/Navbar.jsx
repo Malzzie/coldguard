@@ -22,14 +22,24 @@ function Navbar() {
 
   return (
 
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav
+        className="navbar navbar-expand-lg navbar-dark bg-dark mx-1 mt-2 px-2"
+        style={{
+          borderRadius: "12px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+        }}
+    >
 
-      <div className="container">
+      <div className="container-fluid px-4">
 
         {/* Application title */}
 
-        <span className="navbar-brand">
-          ColdGuard
+        <span
+        className="navbar-brand fw-bold fs-4 ms-2 d-flex align-items-center"
+        style={{ letterSpacing: "0.5px" }}
+        >
+        <span className="me-2">🧊</span>
+        ColdGuard
         </span>
 
         {/* Navigation links */}
@@ -81,7 +91,7 @@ function Navbar() {
             className="nav-link"
             to="/ai-risk-advisor"
           >
-            AI Risk Advisor
+            Operational Advisor
           </Link>
 
           <Link
