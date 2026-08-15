@@ -343,7 +343,7 @@ function Reports() {
         item.movement_type,
         item.quantity,
         item.reference,
-        formatDate(item.created_at),
+        formatDateTime(item.created_at),
       ]);
       filename = "coldguard_movement_audit_report.csv";
     }
@@ -356,7 +356,7 @@ function Reports() {
         alert.temperature,
         alert.severity,
         alert.status,
-        formatDate(alert.created_at),
+        formatDateTime(alert.created_at),
       ]);
       filename = "coldguard_alert_activity_report.csv";
     }
@@ -692,7 +692,7 @@ function Reports() {
               item.movement_type,
               item.quantity,
               item.reference || "N/A",
-              formatDate(item.created_at),
+              formatDateTime(item.created_at),
             ])}
           />
         </ReportCard>
@@ -714,7 +714,7 @@ function Reports() {
               `${alert.temperature}°C`,
               alert.severity,
               alert.status,
-              formatDate(alert.created_at),
+              formatDateTime(alert.created_at),
             ])}
           />
         </ReportCard>
