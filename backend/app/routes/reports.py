@@ -88,17 +88,19 @@ def expiry_management_report(
             status = "Healthy"
             healthy_count += 1
 
-        expiry_results.append({
-            "id": item.id,
-            "sku": getattr(item, "sku", None),
-            "item_name": item.item_name,
-            "category": item.category,
-            "storage_zone": item.storage_zone,
-            "quantity": item.quantity,
-            "expiry_date": expiry_date.isoformat(),
-            "days_remaining": days_remaining,
-            "status": status
-        })
+       # Only include expired products or products within the selected expiry window.
+        if 0 <= days_remaining <= days:
+            expiry_results.append({
+                "id": item.id,
+                "sku": getattr(item, "sku", None),
+                "item_name": item.item_name,
+                "category": item.category,
+                "storage_zone": item.storage_zone,
+                "quantity": item.quantity,
+                "expiry_date": expiry_date.isoformat(),
+                "days_remaining": days_remaining,
+                "status": status
+            })
 
     return {
         "days": days,

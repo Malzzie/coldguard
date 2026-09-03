@@ -141,7 +141,7 @@ def get_temperature_insights(
             "storage zones and investigate alert history."
         )
 
-    elif highest_temperature > 7:
+    elif highest_temperature > 8:
         trend_status = "High Temperature Risk"
         insight = (
             "A high temperature reading has been recorded. "
