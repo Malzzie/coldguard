@@ -133,19 +133,12 @@ def get_temperature_insights(
     total_readings = len(temperature_logs)
     alert_count = len(open_alerts)
 
-    # Determine trend status using simple decision rules
+   # Determine current trend status using active alert conditions.
     if alert_count >= 3:
         trend_status = "Attention Required"
         insight = (
             "Multiple active alerts exist. Review affected "
             "storage zones and investigate alert history."
-        )
-
-    elif highest_temperature > 8:
-        trend_status = "High Temperature Risk"
-        insight = (
-            "A high temperature reading has been recorded. "
-            "Inspect cooling equipment and verify stock safety."
         )
 
     elif alert_count >= 1:
@@ -158,7 +151,7 @@ def get_temperature_insights(
     else:
         trend_status = "Stable"
         insight = (
-            "Temperature readings are currently stable "
+            "Current warehouse temperature conditions are stable "
             "with no active alerts."
         )
 
