@@ -78,10 +78,10 @@ def expiry_management_report(
         if days_remaining < 0:
             status = "Expired"
             expired_count += 1
-        elif days_remaining <= 7:
+        elif days_remaining <= 10:
             status = "Urgent"
             urgent_count += 1
-        elif days_remaining <= days:
+        elif days_remaining <= 30:
             status = "Expiring Soon"
             expiring_soon_count += 1
         else:
