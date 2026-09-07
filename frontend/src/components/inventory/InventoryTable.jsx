@@ -116,7 +116,7 @@ function InventoryTable({
                           className={
                             item.quantity <= 10
                               ? "badge bg-danger px-3 py-2"
-                              : item.quantity <= 20
+                              : item.quantity <= 30
                               ? "badge bg-warning text-dark px-3 py-2"
                               : "badge bg-success px-3 py-2"
                           }
